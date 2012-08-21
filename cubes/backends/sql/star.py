@@ -887,7 +887,7 @@ def ordered_statement(statement, order, context):
                 column = context.column(attribute)
             except KeyError:
                 column = selection[item[0]]
-            order_by[item] = order_column(column, item[1])
+            order_by[item[0]] = order_column(column, item[1])
 
     # Collect natural order for selected columns
 
