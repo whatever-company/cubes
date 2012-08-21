@@ -919,11 +919,12 @@ def order_column(column, order):
     if not order:
         return column
     elif order.lower().startswith("asc"):
-        return column.asc()
+        return column.asc().nullsfirst()
     elif order.lower().startswith("desc"):
-        return column.desc()
+        return column.desc().nullslast()
     else:
         raise ArgumentError("Unknown order %s for column %s") % (order, column)
+
 
 
 class ResultIterator(object):
