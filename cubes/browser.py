@@ -12,6 +12,7 @@ try:
 except ImportError:
     from ordereddict import OrderedDict
 
+from cubes.common import strify_dict
 from cubes.errors import *
 from .model import Dimension, Cube
 from .common import get_logger
@@ -215,7 +216,7 @@ class AggregationBrowser(object):
 
             # FIXME: add: cell = query.get("cell")
 
-            args = dict(query)
+            args = strify_dict(query)
             del args["query"]
 
             # Note: we do not just convert name into function from symbol for possible future

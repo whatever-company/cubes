@@ -10,6 +10,7 @@ __all__ = [
     "logger_name",
     "get_logger",
     "create_logger",
+    "strify_dict",
     "IgnoringDictionary",
     "MissingPackage",
     "localize_common",
@@ -43,6 +44,13 @@ def create_logger():
     logger.addHandler(handler)
 
     return logger
+
+def strify_dict(o):
+    if type(o) == dict:
+        return dict((str(k), strify_dict(v)) for k, v in o.iteritems())
+    elif type(o) == list:
+        return [strify_dict(v) for v in o]
+    return o
 
 class IgnoringDictionary(dict):
     """Simple dictionary extension that will ignore any keys of which values

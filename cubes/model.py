@@ -14,7 +14,7 @@ try:
 except ImportError:
     from ordereddict import OrderedDict
 
-from cubes.common import IgnoringDictionary, get_logger
+from cubes.common import IgnoringDictionary, get_logger, strify_dict
 from cubes.errors import *
 
 try:
@@ -69,12 +69,6 @@ def load_model(resource, translations = None):
 
     try:
         model_desc = json.load(handle)
-        def strify_dict(o):
-            if type(o) == dict:
-                return dict((str(k), strify_dict(v)) for k, v in o.iteritems())
-            elif type(o) == list:
-                return [strify_dict(v) for v in o]
-            return o
         model_desc = strify_dict(model_desc)
     finally:
         if should_close:
