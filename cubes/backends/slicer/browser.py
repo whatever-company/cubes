@@ -1,12 +1,12 @@
 # -*- coding=utf -*-
 
-import cubes.browser
+from cubes import AggregationBrowser, string_from_cuts
 import urllib2
 import json
 import logging
 import urllib
 
-class SlicerBrowser(cubes.browser.AggregationBrowser):
+class SlicerBrowser(AggregationBrowser):
     """Aggregation browser for Cubes Slicer OLAP server."""
     
     def __init__(self, cube, url, locale = None):
@@ -41,7 +41,7 @@ class SlicerBrowser(cubes.browser.AggregationBrowser):
     def aggregate(self, cell, measures = None, drilldown = None, **kwargs):
         result = cubes.AggregationResult()
         
-        cut_string = cubes.browser.string_from_cuts(cell.cuts)
+        cut_string = string_from_cuts(cell.cuts)
         params = [ ("cut", cut_string) ]
         if drilldown:
             for dd in drilldown:
