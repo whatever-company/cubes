@@ -92,6 +92,10 @@ class ApplicationController(object):
             else:
                 self.order.append( (split[0], split[1]) )
 
+        self.measures = None
+        if "measures" in self.args:
+            self.measures = self.args.get("measures").split(',')
+
     def index(self):
         handle = open(os.path.join(TEMPLATE_PATH, "index.html"))
         template = handle.read()
@@ -337,7 +341,8 @@ class CubesController(ApplicationController):
         result = self.browser.aggregate(self.cell, drilldown = dic_drilldown,
                                         page = self.page,
                                         page_size = self.page_size,
-                                        order = self.order)
+                                        order = self.order,
+                                        measures = self.measures)
 
         return self.json_response(result)
 
