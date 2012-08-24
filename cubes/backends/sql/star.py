@@ -439,7 +439,7 @@ class QueryContext(object):
                     attributes |= set(level.attributes)
 
         # TODO: add measures as well
-        join_expression = self.join_expression_for_attributes(cell_cond.attributes)
+        join_expression = self.join_expression_for_attributes(attributes)
 
         selection = []
 
