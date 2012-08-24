@@ -732,7 +732,7 @@ class QueryContext(object):
         condition = sql.expression.and_(*conditions)
         attributes |= last.attributes
 
-        if last.condition:
+        if last.condition is not None:
             condition = sql.expression.or_(condition, last.condition)
 
         return Condition(attributes, condition)
