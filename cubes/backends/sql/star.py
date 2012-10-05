@@ -824,8 +824,8 @@ def coalesce_drilldown(cell, drilldown):
             index = hier.level_index(level)
             result[dim.name] = hier[:index+1]
         else:
-            depth = depths.get(str(dim), 0)
-            result[dim.name] = drilldown_levels(dim, depth+1)
+            depth = depths.get(str(dim), 1)
+            result[dim.name] = drilldown_levels(dim, depth)
 
     return result
 
