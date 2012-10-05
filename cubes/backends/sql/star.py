@@ -654,7 +654,10 @@ class QueryContext(object):
 
             # Prepare condition: dimension.level_key = path_value
             column = self.column(level.key)
-            conditions.append(column == value)
+            if isinstance(column.type, sqlalchemy.types.TEXT) and '*' in value:
+                conditions.append(column.like(value.replace('*', '%')))
+            else:
+                conditions.append(column == value)
 
             # FIXME: join attributes only if details are requested
             # Collect grouping columns
